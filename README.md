@@ -13,3 +13,7 @@ npm run dev
 To run ther server in production mode:
 ```
 npm run prod
+
+Deploy
+```
+docker build -t ram-app .

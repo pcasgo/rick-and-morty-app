@@ -1,11 +1,11 @@
-import { Auth } from './routes/auth';
-import { Characters } from './routes/characters';
-import config from '../configs/config';
+import { Auth } from './src/routes/auth';
+import { Characters } from './src/routes/characters';
+import { Middleware } from './src/middleware'
+import config from './configs/config';
 import express from 'express';
 import bodyParser from 'body-parser';
-import { Middleware } from '../app/middleware'
+import redis from 'redis';
 const app = express();
-const redis = require('redis');
 const client = redis.createClient();
 
 app.set('key', config.key);
@@ -25,8 +25,8 @@ app.get('/characters', rutasProtegidas, Characters.getChars);
 
 client.on('connect', function () {
     console.log('Servicio Redis conectado');
-    app.listen(3000, () => {
-        console.log('Servidor iniciado')
+    app.listen(3500, () => {
+        console.log('Servidor iniciado en puerto 3500')
     });
 });
 
