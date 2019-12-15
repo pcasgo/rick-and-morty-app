@@ -10,7 +10,6 @@ export class Characters {
                 });
                 return console.dir(error);
             }
-            console.dir(JSON.parse(body));
             const chars = JSON.parse(body);
             const newChars = [];
             for (const char of chars.results) {

@@ -3,30 +3,36 @@ import { Characters } from './src/routes/characters';
 import { Middleware } from './src/middleware'
 import config from './configs/config';
 import express from 'express';
-import bodyParser from 'body-parser';
 import redis from 'redis';
+import morgan from 'morgan';
+import path from 'path';
 const app = express();
-const client = redis.createClient();
+const client = redis.createClient(6379, 'localhost');
 
+// Settings
+app.set('port', process.env.PORT || 3500);
 app.set('key', config.key);
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
-app.get('/', function (req: any, res: any) {
-    res.send('Inicio');
-});
 
-app.post('/register', (req: any, res: any) => { Auth.register(req, res, client) });
-app.post('/login', (req: any, res: any) => { Auth.login(req, res, client) });
-
+// Middleware
+app.use(express.json());
+app.use(morgan('dev'));
 const rutasProtegidas = express.Router();
 rutasProtegidas.use(Middleware.secureJwt)
 
-app.get('/characters', rutasProtegidas, Characters.getChars);
+// Static 
+app.use(express.static(path.join(__dirname, 'src', 'public')));
 
+// Routes
+app.get('/characters', rutasProtegidas, Characters.getChars);
+app.post('/register', (req: any, res: any) => { Auth.register(req, res, client) });
+app.post('/login', (req: any, res: any) => { Auth.login(req, res, client) });
+console.log(path.join(__dirname, 'public'));
+
+// Start server
 client.on('connect', function () {
     console.log('Servicio Redis conectado');
-    app.listen(3500, () => {
-        console.log('Servidor iniciado en puerto 3500')
+    app.listen(app.get('port'), () => {
+        console.log(`Servidor iniciado en puerto: ${app.get('port')}`);
     });
 });
 

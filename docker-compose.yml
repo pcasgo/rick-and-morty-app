@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  node:
+    build: .
+    ports:
+      - 3500:3500
+  redis:
+    image: redis:latest
+    ports:
+      - 6379:6379

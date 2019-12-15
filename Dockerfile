@@ -1,4 +1,4 @@
-FROM centos/nodejs-10-centos7
+FROM node:10
 EXPOSE 3500
 
 RUN mkdir -p /home/node/app

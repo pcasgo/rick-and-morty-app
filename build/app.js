@@ -11,7 +11,7 @@ var express_1 = __importDefault(require("express"));
 var body_parser_1 = __importDefault(require("body-parser"));
 var redis_1 = __importDefault(require("redis"));
 var app = express_1.default();
-var client = redis_1.default.createClient();
+var client = redis_1.default.createClient(6379, 'localhost');
 app.set('key', config_1.default.key);
 app.use(body_parser_1.default.urlencoded({ extended: true }));
 app.use(body_parser_1.default.json());
