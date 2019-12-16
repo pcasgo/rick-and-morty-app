@@ -27,6 +27,7 @@ export class Auth {
     }
 
     static async login(req: any, res: any, redis: any) {
+        console.log("USUARIO: ", req.body);
         const password = await this.getPass(req.body.user, redis);
         if (password !== null) {
             if (password !== req.body.password) {
