@@ -12,7 +12,7 @@ export class Auth {
             });
             return;
         }
-        const result = await redis.set(req.body.userName, req.body.password);
+        const result = await redis.set(req.body.user, req.body.password);
         if (result) {
             res.json({
                 status: 201,
@@ -27,7 +27,6 @@ export class Auth {
     }
 
     static async login(req: any, res: any, redis: any) {
-        console.log("USUARIO: ", req.body);
         const password = await this.getPass(req.body.user, redis);
         if (password !== null) {
             if (password !== req.body.password) {
