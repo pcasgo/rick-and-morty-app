@@ -48,6 +48,12 @@ export class Auth {
                 token: token
             });
             return;
+        }else{
+            res.json({
+                status: 400,
+                message: 'Usuario o password no valido',
+            });
+            return;
         }
     }
     private static async getPass(user: string, redis: any) {
