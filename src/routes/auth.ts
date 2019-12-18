@@ -8,7 +8,7 @@ export class Auth {
         if (password !== null) {
             res.json({
                 status: 400,
-                message: 'Error: usuario ya existe',
+                message: 'El usuario ingresado ya existe',
             });
             return;
         }
@@ -21,7 +21,7 @@ export class Auth {
         } else {
             res.json({
                 status: 500,
-                message: 'Registro no realizado'
+                message: 'No se pudo realizar el registro'
             });
         }
     }
