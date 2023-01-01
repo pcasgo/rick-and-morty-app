@@ -23,7 +23,7 @@
     "request": "^2.88.0",
     "ts-node-dev": "^1.0.0-pre.44",
     "typescript": "^3.7.3",
-    "webpack": "^4.41.2"
+    "webpack": "^5.75.0"
   },
   "devDependencies": {
     "@types/cors": "^2.8.6",
